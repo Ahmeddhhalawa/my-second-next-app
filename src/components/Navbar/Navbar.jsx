@@ -15,6 +15,7 @@ export default function Navbar( ) {
             <h1>
                 <Link href="/">Mo Blog</Link>
             </h1>
+            
             <ul className={`${classes["nav-list"]} ${showNavList ? classes["show-nav-list"] : ""}`}>
                 <NavLink href="/" text="Home" hideNavList={hideNavList}/>
                 <NavLink href="/blog" text="Blog" hideNavList={hideNavList}/>
@@ -22,7 +23,7 @@ export default function Navbar( ) {
                 <NavLink href="/contacts" text="Contacts" hideNavList={hideNavList}/>
             </ul>
 
-            <button className={classes["menu-button"]} onClick={toggleMenu}>
+            <button className={classes["menu-button"]} onClick={toggleMenu} aria-label="menu">
                 <span></span>
                 <span></span>
                 <span></span>
