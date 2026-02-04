@@ -8,3 +8,8 @@
     visibility: hidden;
     opacity: 0;
 }
+
+.actions {
+    display: flex;
+    gap: 5px;
+}

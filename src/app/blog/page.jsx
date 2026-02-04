@@ -3,6 +3,7 @@
 import { useState } from "react"
 
 import classes from "./page.module.css"
+import Button from "@/components/UiElements/Button"
 
 export default function BlogPage() {
     const [counter, setCounter] = useState(0)
@@ -29,9 +30,11 @@ export default function BlogPage() {
             <h2>Blog Page</h2>
             <div>
                 <p>{counter}</p>
-                <button onClickCapture={increaseCounter}>+</button>
-                <button onClickCapture={decreaseCounter}>-</button>
-                <button onClickCapture={resetCounter}>Reset</button>
+                <section className={classes["actions"]}>
+                    <Button onClick={increaseCounter} disabled={counter >= 10}>+</Button>
+                    <Button onClick={decreaseCounter} outline disabled={counter <= 0}>-</Button>
+                    <Button onClick={resetCounter} danger disabled={counter === 0}>Reset</Button>
+                </section> 
             </div>
 
             <br />
@@ -39,7 +42,7 @@ export default function BlogPage() {
             <br />
 
             <div>
-                <button onClick={toggleMenu}>{showList ? "Hide" : "Show"} menu</button>
+                <Button onClick={toggleMenu} danger={showList}>{showList ? "Hide" : "Show"} menu</Button>
                     <ul className={`${classes["list"]} 
                         ${!showList ? classes["hide-list"] : ""}`}>
                     <li>Item 1</li>
