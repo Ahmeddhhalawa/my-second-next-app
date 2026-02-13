@@ -1,0 +1,21 @@
+.title {
+    color: var(--red);
+    margin: 5px 10px;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.img {
+    width: 400px;
+    height: 250px;
+    transform: rotate(10deg);
+    margin-top: 50px;
+    object-fit: contain;
+}
+

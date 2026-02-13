@@ -1,10 +1,10 @@
-import Button from "@/components/UiElements/Button"
-
+import Welcome from "@/components/Home/Welcome"
+import Skills from "@/components/Home/Skills"
 export default function HomePage() {
   return (
     <div>
-        <h2>Hello this is next app</h2>
-        <Button href="/blog" outline>Blog</Button>
+        <Welcome />
+        <Skills />
     </div>
   )
 } 
