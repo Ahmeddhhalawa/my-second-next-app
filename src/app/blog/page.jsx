@@ -1,26 +1,20 @@
 "use client"
 
 import { useState } from "react"
-
 import classes from "./page.module.css"
 import Button from "@/components/UiElements/Button"
 
 export default function BlogPage() {
     const [counter, setCounter] = useState(0)
     const [showList, setShowList] = useState(true)
-
     const increaseCounter = () => {
         if(counter >= 10) return
-
         setCounter(counter + 1)
     }
-
     const decreaseCounter = () => {
         if(counter <= 0) return
-
         setCounter(counter - 1)
     }
-
     const resetCounter = () => setCounter(0)
 
     const toggleMenu = () => setShowList(!showList)
