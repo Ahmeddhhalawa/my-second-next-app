@@ -20,7 +20,7 @@ export default function Navbar( ) {
                 <NavLink href="/" text="Home" hideNavList={hideNavList}/>
                 <NavLink href="/blog" text="Blog" hideNavList={hideNavList}/>
                 <NavLink href="/about" text="About" hideNavList={hideNavList}/>
-                <NavLink href="/contacts" text="Contacts" hideNavList={hideNavList}/>
+                <NavLink href="/Contacts" text="Contacts" hideNavList={hideNavList}/>
             </ul>
 
             <button className={classes["menu-button"]} onClick={toggleMenu} aria-label="menu">

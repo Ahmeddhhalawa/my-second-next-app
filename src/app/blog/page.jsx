@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import classes from "./page.module.css"
-import Button from "@/components/UiElements/Button"
+import Button from "@/Components/UiElements/Button"
 
 export default function BlogPage() {
     const [counter, setCounter] = useState(0)

@@ -1,5 +1,5 @@
-import Skills from "@/components/Home/Skills"
-import Welcome from "@/components/Home/Welcome"
+import Skills from "@/Components/Home/Skills"
+import Welcome from "@/Components/Home/Welcome"
 
 export default function HomePage() {
   return (
