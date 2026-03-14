@@ -28,3 +28,30 @@
     text-align: right;
     height: 5px;
 }
+
+.password {
+    background-color: var(--white);
+    width: 100%;
+    display: flex;
+    border: 1px solid var(--black);
+    height: fit-content;
+    border-radius: 5px;
+    overflow: hidden;
+
+}
+
+.password input {
+    margin: 0px;
+    border-radius: 0px;
+    border: none;
+    outline: none;
+}
+
+.btn {
+    background-color: var(--white);
+    color: var(--black);
+    outline: none;
+    border: none;
+    height: 25px;
+    line-height: 0.5;
+}

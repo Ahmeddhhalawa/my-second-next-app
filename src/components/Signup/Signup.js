@@ -1,8 +1,8 @@
 "use client"
+import classes from "./Signup.module.css"
 import Input from "../UiElements/Input"
 import Button from "../UiElements/Button"
-import { isEmail, minLength, isSame,  } from "@/helpers/validators" 
-import classes from "./Signup.module.css"
+import { isEmail, minLength, isSame, isEmpty } from "@/helpers/validators" 
 import { useState } from "react"
 
 export default function Signup() {
@@ -12,11 +12,12 @@ export default function Signup() {
     const [ passwordError, setPasswordError ] = useState(false)
     const [ confirmPassword, setConfirmPassword ] = useState("")
     const [ confirmPasswordError, setConfirmPasswordError ] = useState(false)
+    const [ equalityError, setEqualityError ] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(!isEmail(email) || !minLength(password) || !isSame(password, confirmPassword)) {
+        if(!isEmail(email) || !minLength(password) || isEmpty(confirmPassword) || !isSame(password, confirmPassword)) {
             if(!isEmail(email)) {
                 setEmailError(true)
             }
@@ -25,9 +26,15 @@ export default function Signup() {
                 setPasswordError(true)
             }
 
-            if(!isSame(password, confirmPassword)) {
+            if(!minLength(confirmPassword)) {
                 setConfirmPasswordError(true)
             }
+
+            if(!isSame(password, confirmPassword)) {
+                setEqualityError(true)
+            } else {
+            }
+            
 
             return
         }
@@ -35,6 +42,7 @@ export default function Signup() {
         setEmail("")
         setPassword("")
         setConfirmPassword("")
+        setEqualityError(false)
     }
 
     return (
@@ -62,7 +70,7 @@ export default function Signup() {
              placeholder="Enter your Password."
              value={password}
              error={passwordError}
-             errorText="Please provide a valid Password"
+             errorText="Password should be atleast 8 chars!"
              label="Password"
              onChange={(e) => {
                 const { value } = e.target
@@ -77,14 +85,17 @@ export default function Signup() {
              placeholder="Enter your Confirm Password."
              value={confirmPassword}
              error={confirmPasswordError}
-             errorText="Passwords not the same"
+             errorText="Password should be atleast 8 chars!"
              label="Confirm Password"
              onChange={(e) => {
                 const { value } = e.target
                 setConfirmPassword(value)
                 if(minLength(value)) setConfirmPasswordError(false)
+                if(isSame(password, confirmPassword)) setEqualityError(false)
              }}
             />
+
+            <p className={` ${classes["error"]} ${equalityError ? classes["show-error"] :  ""}`}>Passwords are not the same</p>
         <Button className={classes["btn"]}>Send</Button>
         </form>
     )

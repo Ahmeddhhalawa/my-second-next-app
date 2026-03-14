@@ -23,6 +23,20 @@
     margin: auto;
 }
 
+.error {
+    margin: auto;
+    color: var(--red);
+    font-size: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.show-error {
+    visibility: visible;
+    opacity: 1;
+}
+
 .btn {
     padding: 5px 10px;
     color: var(--color-three);
