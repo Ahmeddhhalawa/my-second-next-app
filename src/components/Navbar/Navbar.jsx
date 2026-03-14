@@ -21,6 +21,7 @@ export default function Navbar( ) {
                 <NavLink href="/blog" text="Blog" hideNavList={hideNavList}/>
                 <NavLink href="/about" text="About" hideNavList={hideNavList}/>
                 <NavLink href="/Contacts" text="Contacts" hideNavList={hideNavList}/>
+                <NavLink href="/Signup" text="Sign up" hideNavList={hideNavList}/>
             </ul>
 
             <button className={classes["menu-button"]} onClick={toggleMenu} aria-label="menu">

@@ -1,0 +1,31 @@
+.sign-form {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-three);
+    border: 1px solid var(--color-one);
+    width: 500px;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.sign-form input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.sign-form h1 {
+    color: var(--color-one);
+    font-size: 27px;
+    margin: auto;
+}
+
+.btn {
+    padding: 5px 10px;
+    color: var(--color-three);
+    background-color: var(--color-one);
+    margin: auto;
+}
