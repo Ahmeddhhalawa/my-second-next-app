@@ -2,10 +2,14 @@
 import classes from "./Signup.module.css"
 import Input from "../UiElements/Input"
 import Button from "../UiElements/Button"
-import { isEmail, minLength, isSame, isEmpty } from "@/helpers/validators" 
+import { isEmail, minLength, isSame, isEmpty, minAge } from "@/helpers/validators" 
 import { useState } from "react"
 
 export default function Signup() {
+    const [ name, setName ] = useState("")
+    const [ nameError, setNameError ] = useState(false)
+    const [ age, setAge ] = useState(0)
+    const [ ageError, setAgeError ] = useState(false)
     const [ email, setEmail ] = useState("")
     const [ emailError, setEmailError ] = useState(false)
     const [ password, setPassword ] = useState("")
@@ -17,7 +21,7 @@ export default function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        if(!isEmail(email) || !minLength(password) || isEmpty(confirmPassword) || !isSame(password, confirmPassword)) {
+        if(!isEmail(email) || !minLength(password) || isEmpty(confirmPassword) || !isSame(password, confirmPassword) || !minLength(name) || !minAge(age)) {
             if(!isEmail(email)) {
                 setEmailError(true)
             }
@@ -32,13 +36,22 @@ export default function Signup() {
 
             if(!isSame(password, confirmPassword)) {
                 setEqualityError(true)
-            } else {
+            }
+            
+            if(!minLength(name)) {
+                setNameError(true)
+            }
+            
+            if(!minAge(age)) {
+                setAgeError(true)
             }
             
 
             return
         }
 
+        setName("")
+        setAge("")
         setEmail("")
         setPassword("")
         setConfirmPassword("")
@@ -48,6 +61,36 @@ export default function Signup() {
     return (
         <form className={classes["sign-form"]} onSubmit={handleSubmit}>
             <h1>Sign up</h1>
+
+            <Input
+             id="name"
+             type="text"
+             label="Name"
+             placeholder="Enter your Name."
+             value={name}
+             error={nameError}
+             errorText="Name should be atleast 8 chars!"
+             onChange={(e) => {
+                const { value } = e.target
+                setName(value)
+                if(minLength(value)) setNameError(false)
+             }}
+            />
+
+            <Input
+             id="age"
+             type="number"
+             label="Age"
+             placeholder="Enter your Age."
+             value={age}
+             error={ageError}
+             errorText="You should be at least 18 years old to use this web!"
+             onChange={(e) => {
+                const { value } = e.target
+                setAge(value)
+                if(minAge(value)) setAgeError(false)
+             }}
+            />
 
             <Input
              id="email"
