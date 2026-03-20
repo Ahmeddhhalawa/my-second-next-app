@@ -2,14 +2,14 @@
 import classes from "./Signup.module.css"
 import Input from "../UiElements/Input"
 import Button from "../UiElements/Button"
-import { isEmail, minLength, isSame, isEmpty, minAge } from "@/helpers/validators" 
+import { isEmail, minLength, isSame, isEmpty } from "@/helpers/validators" 
 import { useState } from "react"
 
 export default function Signup() {
     const [ name, setName ] = useState("")
     const [ nameError, setNameError ] = useState(false)
-    const [ age, setAge ] = useState(0)
-    const [ ageError, setAgeError ] = useState(false)
+    const [ birthdate, setBirthdate ] = useState("")
+    const [ birthdateError, setBirthdateError ] = useState(false)
     const [ email, setEmail ] = useState("")
     const [ emailError, setEmailError ] = useState(false)
     const [ password, setPassword ] = useState("")
@@ -17,11 +17,14 @@ export default function Signup() {
     const [ confirmPassword, setConfirmPassword ] = useState("")
     const [ confirmPasswordError, setConfirmPasswordError ] = useState(false)
     const [ equalityError, setEqualityError ] = useState(false)
+    const [ message, setMessage ] = useState("")
+    const [ showMsg, setShowMsg ] = useState(false)
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        if(!isEmail(email) || !minLength(password) || isEmpty(confirmPassword) || !isSame(password, confirmPassword) || !minLength(name) || !minAge(age)) {
+        
+        if(!isEmail(email) || !minLength(password) || !minLength(confirmPassword)  || isEmpty(birthdate) || !isSame(password, confirmPassword) || !minLength(name) ) {
             if(!isEmail(email)) {
                 setEmailError(true)
             }
@@ -29,7 +32,7 @@ export default function Signup() {
             if(!minLength(password)) {
                 setPasswordError(true)
             }
-
+            
             if(!minLength(confirmPassword)) {
                 setConfirmPasswordError(true)
             }
@@ -42,22 +45,44 @@ export default function Signup() {
                 setNameError(true)
             }
             
-            if(!minAge(age)) {
-                setAgeError(true)
+            if(!minLength(birthdate)) {
+                setBirthdateError(true)
             }
             
-
+            
             return
         }
 
         setName("")
-        setAge("")
         setEmail("")
         setPassword("")
         setConfirmPassword("")
+        setBirthdate("")
         setEqualityError(false)
+        setShowMsg(true)
     }
 
+const calcBirthdate = (dataString) => {
+  const birth = new Date(dataString);
+  const today = new Date();
+  let years = today.getFullYear() - birth.getFullYear();
+  let months = today.getMonth() - birth.getMonth();
+  let days = today.getDate() - birth.getDate();
+
+  if (days < 0) {
+    months--;
+    const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  // ✅ USE THE SAME VARIABLES
+  setMessage(`You are ${years} years, ${months} months, and ${days} days old`);
+};
     return (
         <form className={classes["sign-form"]} onSubmit={handleSubmit}>
             <h1>Sign up</h1>
@@ -78,17 +103,19 @@ export default function Signup() {
             />
 
             <Input
-             id="age"
-             type="number"
-             label="Age"
-             placeholder="Enter your Age."
-             value={age}
-             error={ageError}
-             errorText="You should be at least 18 years old to use this web!"
+             id="birthdate"
+             type="date"
+             label="Birthdate"
+             placeholder="Enter your Birthdate."
+             value={birthdate}
+             error={birthdateError}
+             errorText="Enter a valid birthdate!"
              onChange={(e) => {
-                const { value } = e.target
-                setAge(value)
-                if(minAge(value)) setAgeError(false)
+                setShowMsg(false)
+                 const { value } = e.target
+                 setBirthdate(value)
+                 calcBirthdate(value)
+                if(minLength(value)) setBirthdateError(false)
              }}
             />
 
@@ -139,6 +166,7 @@ export default function Signup() {
             />
 
             <p className={` ${classes["error"]} ${equalityError ? classes["show-error"] :  ""}`}>Passwords are not the same</p>
+            <p className={ `${classes["message"]} ${showMsg ? classes["show-msg"] : ""}`} onClick={calcBirthdate}>{message}</p>
         <Button className={classes["btn"]}>Send</Button>
         </form>
     )

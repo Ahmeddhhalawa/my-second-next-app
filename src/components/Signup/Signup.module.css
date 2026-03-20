@@ -43,3 +43,18 @@
     background-color: var(--color-one);
     margin: auto;
 }
+
+.message {
+    margin: 10px auto;
+    color: var(--color-one);
+    visibility: hidden;
+    font-size: 0px;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.show-msg {
+    visibility: visible;
+    font-size: 20px;
+    opacity: 1;
+}

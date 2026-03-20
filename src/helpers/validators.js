@@ -2,4 +2,3 @@ export const isEmpty = (value) => value?.trim().length === 0
 export const isEmail = (value) => value?.trim().includes("@")
 export const minLength = (value, min = 8) => value?.trim().length >= min
 export const isSame = (val1, val2) => val1 === val2
-export const minAge = (value) => value >= 18
